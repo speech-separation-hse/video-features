@@ -102,12 +102,13 @@ def load_video(file, gpu_idx):
     try:
         out, err = ffmpeg.run(stream)
     except:
-        print("FFMPEGU PRISHLA PIZDA")
+        print(f"ffmpeg couldn't decode file: {file}")
         return None, p
 
     if err:
         print(err)
-        return None, p 
+        return None, p
+
     #cmd = 'ffmpeg -i \'{}\' -qscale:v 2 -r 25 \'{}/%d.jpg\''.format(file, p)
     
     files = os.listdir(p)
@@ -143,14 +144,18 @@ def load_video(file, gpu_idx):
         elif video:
             video.append(video[-1])
         else:
-            print("NAM PIZDA!!!", file)
+            print("first frame is missing", file)
+
+
     if not video:
-        print("Pizdec prishol v konce")
+        print("No faces in video")
         return None, p
+
+
     video = np.stack(video, axis=0).astype(np.float32)
     video = torch.FloatTensor(video.transpose(3, 0, 1, 2)) / 255.0
     del fa
-    #torch.cuda.empty_cache()
+
     return video, p
 
 
