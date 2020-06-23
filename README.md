@@ -1,3 +1,17 @@
+***
+
+Для использования информации из видео предварительно были выделены видео-признаки при помощи `lip embedding extractor`.
+
+Для этого:
+* выделялась область с губами
+* применялась модель, описанная ниже
+* брались факторы с последнего `GRU` слоя (размерность - 512)
+
+[пример фичей](PB7xs7UpIfY_50004.npy)
+
+
+***
+
 # LipNet: End-to-End Sentence-level Lipreading
 
 The state-of-art PyTorch implementation of 'LipNet: End-to-End Sentence-level Lipreading' by Yannis M. Assael, Brendan Shillingford, Shimon Whiteson, and Nando de Freitas (https://arxiv.org/abs/1611.01599). This version achieves **the best performance in all evaluation metrics**.

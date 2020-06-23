@@ -56,7 +56,7 @@ class LipNet(torch.nn.Module):
                 init.constant_(m.bias_ih_l0_reverse[i: i + 256], 0)
         
         
-    def forward(self, x):
+    def forward(self, x, return_video_features=False):
         
         x = self.conv1(x)
         x = self.relu(x)
@@ -84,10 +84,11 @@ class LipNet(torch.nn.Module):
         x, h = self.gru1(x)        
         x = self.dropout(x)
         x, h = self.gru2(x)   
+        video_features = x
         x = self.dropout(x)
                 
         x = self.FC(x)
         x = x.permute(1, 0, 2).contiguous()
-        return x
+        return video_features if return_video_features else x
         
     
