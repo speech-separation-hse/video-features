@@ -6,10 +6,9 @@ from torch.utils.data import DataLoader
 import math
 import os
 import sys
-from dataset import MyDataset
 import numpy as np
 import time
-from model import LipNet
+
 import torch.optim as optim
 import re
 import json
@@ -174,6 +173,8 @@ def process(gpu_idx, video_name):
         
 
 if(__name__ == '__main__'):
+    from dataset import MyDataset
+    from model import LipNet
     opt = __import__('options')
     #os.environ['CUDA_VISIBLE_DEVICES'] = opt.gpu    
     
